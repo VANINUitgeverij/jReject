@@ -1,6 +1,9 @@
-/*!
+/*
+ * !! Customized version by Dieter Geerts <dieter.geerts@axians.com>!!
+ * TODO: customize html output for better styling?
+ *
  * jReject (jQuery Browser Rejection Plugin)
- * Version 1.1.x
+ * Version 1.1.0
  * URL: http://jreject.turnwheel.com/
  * Description: jReject is a easy method of rejecting specific browsers on your site
  * Author: Steven Bower (TurnWheel Designs) http://turnwheel.com/
@@ -8,107 +11,113 @@
  */
 
 #jr_overlay {
-	top: 0;
-	left: 0;
-	padding: 0;
-	margin: 0;
-	z-index: 2147483646;
-	position: absolute;
+    position: absolute; top: 0; left: 0;
+    width: 100% !important; height: 100% !important;
+    padding: 0; margin: 0; z-index: 2147483646;
 }
 
 #jr_wrap {
-	position: absolute;
-	width: 100%;
-	z-index: 2147483647;
-	padding: 0;
-	margin: 0;
+    position: absolute; top: 0 !important; left: 0 !important;
+    width: 100% !important; height: 100% !important;
+    padding: 0; margin: 0; z-index: 2147483647;
 }
 
 #jr_inner {
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Verdana, sans-serif;
-	font-size: 12px;
-	background: #FFF;
-	border: 1px solid #CCC;
-	color: #4F4F4F;
-	margin: 0 auto;
-	height: auto;
-	padding: 20px;
-	position: relative;
-	box-sizing: content-box;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Verdana, sans-serif;
+    font-size: 12px; color: #4F4F4F; background: #FFF; border: 1px solid #CCC;
+    position: absolute; top: 0; left: 0; height: 100%;
+    width: 100% !important; min-width: 0 !important; max-width: 100% !important;
+    margin: 0 auto; padding: 0; box-sizing: border-box;
 }
 
 #jr_header {
-	display: block;
-	color: #333;
-	padding: 5px;
-	padding-bottom: 0;
-	margin: 0;
-	font-family: Helvetica, Arial, sans-serif;
-	font-weight: bold;
-	font-size: 1.3em;
-	margin-bottom: 0.5em;
+    display: block; text-align: center; margin: 0; padding: 40px 20px 5px 20px;
+    font-family: Helvetica, Arial, sans-serif; font-weight: bold; font-size: 2em;
+    text-transform: uppercase;
 }
 
 #jr_inner p {
-	padding: 5px;
-	margin: 0;
+    margin: 0; padding: 0 5px 30px 5px; text-align: center; font-size: 1.8em;
+}
+
+#jr_header,
+#jr_inner p {
+    position: relative; z-index: 2147483648; font-weight: bold;
+    background-color: rgba(80, 80, 80, 0.65); color: #FFFFFF;
+}
+
+#jr_inner p:last-of-type {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 #jr_inner ul {
-	list-style-image: none;
-	list-style-position: outside;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    list-style-image: none; list-style-position: outside; list-style-type: none;
+    margin: 0; padding: 0; display: table; width: 100%; height: 100%; table-layout: fixed;
 }
 
 #jr_inner ul li {
-	cursor: pointer;
-	float: left;
-	width: 120px;
-	height: 122px;
-	margin: 0 10px 10px 10px;
-	padding: 0;
-	text-align: center;
+    display: table-cell; width: 1%; margin: 0; padding: 0;
+    cursor: pointer; text-align: center; vertical-align: middle;
 }
 
+#jr_edge { background: #4E99D3 !important; }
+#jr_chrome { background: #61CC57 !important; }
+#jr_firefox { background: #f19a2a !important; }
+#jr_safari { background: #00a0e6 !important; }
+
 #jr_inner li a {
-	color: #333;
-	font-size: 0.8em;
-	text-decoration: none;
-	padding: 0;
-	margin: 0;
+    text-decoration: none; padding: 0;
+    font-size: 1.6em; color: #FFFFFF; font-weight: bold; text-transform: uppercase;
 }
 
 #jr_inner li a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 #jr_inner .jr_icon {
-	width: 100px;
-	height: 100px;
-	margin: 1px auto;
-	padding: 0;
-	background: transparent no-repeat scroll left top;
-	cursor: pointer;
+    background: none !important;
+    width: 100%; height: 120px;
+    margin: 30px auto; padding: 0;
+    position: relative; z-index: 1;
+    transition: .2s ease; transition-property: height;
+}
+
+#jr_inner li:hover .jr_icon {
+    height: 200px;
+}
+
+#jr_inner li {
+    position: relative;
+}
+
+#jr_inner .jr_icon_shadow {
+    position: relative; top: 120px; left: 50%; transform: translate(-50%, 0);
+    width: 2px; height: 2px; border-radius: 1px;
+    transition: 0.8s ease; transition-property: box-shadow;
+    box-shadow: 0 0 190px 140px rgba(250, 250, 250, 0.3);
+}
+
+#jr_inner li:hover .jr_icon_shadow {
+    box-shadow: 0 0 250px 220px rgba(250, 250, 250, 0.35);
 }
 
 #jr_close {
-	clear: both;
-	padding: 0;
-	margin: 0;
+    clear: both;
+    padding: 0;
+    margin: 0;
 }
 
 #jr_close a {
-	color: #000;
-	display: block;
-	width: auto;
-	margin: 0;
-	padding: 0;
-	text-decoration: underline;
+    color: #000;
+    display: block;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    text-decoration: underline;
 }
 
 #jr_close p {
-	padding: 10px 0 0 0;
-	margin: 0;
+    padding: 10px 0 0 0;
+    margin: 0;
 }
