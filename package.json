@@ -1,6 +1,6 @@
 {
   "name": "jreject",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "jQuery Browser Rejection Plugin customized for VANIN Planner project",
   "main": "js/jquery.reject.js",
   "scripts": {
