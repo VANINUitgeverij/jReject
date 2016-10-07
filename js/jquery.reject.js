@@ -20,7 +20,7 @@
                  * Many possible combinations.
                  * You can specify browser (msie, chrome, firefox)
                  * You can specify rendering engine (geko, trident)
-                 * You can specify OS (Win, Mac, Linux, Solaris, iPhone, iPad)
+                 * You can specify OS (Win, Mac, Linux, Solaris, iOS, WindowsPhone, Android)
                  *
                  * You can specify versions of each.
                  * Examples: msie9: true, firefox8: true,
@@ -134,7 +134,7 @@
             // Check 2: Browser+major version (optional) (eg. 'firefox','msie','{msie: 6}')
             // Check 3: Browser+major version (eg. 'firefox3','msie7','chrome4')
             // Check 4: Rendering engine+version (eg. 'webkit', 'gecko', '{webkit: 537.36}')
-            // Check 5: Operating System (eg. 'win','mac','linux','solaris','iphone')
+            // Check 5: Operating System (eg. 'win','mac','linux','solaris','ios')
             var layout = settings[$.layout.name],
                 browser = settings[$.browser.name];
             return !!(settings['all']
@@ -559,6 +559,25 @@
                 r.className = r.name + r.versionX;
 
                 return r;
+            },getOs = function(platform, userAgent) {
+                // http://stackoverflow.com/questions/21741841/detecting-ios-android-operating-system
+
+                // Needs to be tested before Android
+                if (/windows phone/i.test(userAgent)) {
+                    return "windowsphone";
+                }
+
+                if (/android/i.test(userAgent)) {
+                    return "android";
+                }
+
+                // iOS detection from: http://stackoverflow.com/a/9039885/177710
+                if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                    return "ios";
+                }
+
+                return (/(win|mac|linux|sunos|solaris)/.
+                exec(navigator.platform.toLowerCase()) || [u])[0].replace('sunos', 'solaris');
             };
 
         a = (/Opera|Navigator|Minefield|KHTML|Chrome|CriOS/.test(a) ? m(a, [
@@ -584,8 +603,7 @@
         ], /(applewebkit|rv|konqueror|msie)(\:|\/|\s)([a-z0-9\.]*?)(\;|\)|\s)/);
 
         $.os = {
-            name: (/(win|mac|linux|sunos|solaris|iphone|ipad)/.
-            exec(navigator.platform.toLowerCase()) || [u])[0].replace('sunos', 'solaris')
+            name: getOs(navigator.platform, navigator.userAgent)
         };
 
         if (!z) {
